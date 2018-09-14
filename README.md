@@ -29,7 +29,7 @@ The output json file may need different processing depending on current aims. Th
 
 ### Authors and citation
 
-#### If use this code, please cite this [paper](https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1878.pdf)
+#### When using this code, please cite this [paper](https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1878.pdf)
 
 Authors: Belyaev Andrey, Kazimirova Evdokia
 
