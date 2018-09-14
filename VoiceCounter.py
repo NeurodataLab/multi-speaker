@@ -75,7 +75,7 @@ class VoiceCounter:
         img = misc.imread(img_path).mean(axis=-1)
         W, H = img.shape[:2]
         batch, seconds = [], []
-        for i in range(0, H - self.interval_size, self.step_size):
+        for i in tqdm(range(0, H - self.interval_size, self.step_size)):
             batch_img = img[:, i: i + self.interval_size]
             batch_img = transform.resize(batch_img, self.image_shape)
             batch_img = self.prepare_image(batch_img)
@@ -95,7 +95,9 @@ class VoiceCounter:
             json.dump(img_info, f, indent=2)
 
     def process_folder(self, folder):
-        for im_path in tqdm(os.listdir(folder)):
+        im_paths = os.listdir(folder)
+        for n, im_path in enumerate(im_paths):
+            print 'Start image %d/%d: %s' % (n + 1, len(im_paths), im_path)
             if im_path.endswith(('jpg', 'jpeg')):
                 self.process_spectrogram(osp.join(folder, im_path))
 
@@ -104,7 +106,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--spec-path', type=str, default=None, help='Path to spectrogram')
     parser.add_argument('-d', '--dir', type=str, default=None, help='Path to directory with spectrograms')
-    parser.add_argument('--model-path', type=str, default=osp.join(home, 'models/voice_counter'),
+    parser.add_argument('--model-path', type=str, default=osp.join(home, 'model/voice_counter'),
                         help='Path to mxnet model')
     parser.add_argument('--model-epoch', type=int, default=0, help='Model epoch')
     parser.add_argument('--batch-size', type=int, default=32, help='Batch size')
@@ -121,7 +123,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    assert args.spec_path is not None and args.dir is not None, 'No spectrograms to process'
+    assert args.spec_path is not None or args.dir is not None, 'No spectrograms to process'
 
     voice_counter = VoiceCounter(model_path=args.model_path, model_epoch=args.model_epoch, batch_size=args.batch_size,
                                  image_shape=args.image_shape, sec_size=args.sec_size, interval_sec=args.interval,
