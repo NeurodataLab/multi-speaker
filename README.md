@@ -21,7 +21,7 @@ For full information about params see \
 
 * Linux
 * python2
-* numpy, scipy, matplotlib, [mxnet](https://mxnet.incubator.apache.org/install), tqdm
+* numpy, scipy, scikit-image, matplotlib, [mxnet](https://mxnet.incubator.apache.org/install), tqdm
 
 ### Future updates
 
