@@ -6,7 +6,7 @@ The aim of the project is to detect fragments in audio files where there are mor
 
 ### How to use
 
-First step: compute spectrogram from input audio (spectrogram: 0-1500 Hz & grey color) --> specs/SPEC.jpeg\
+First step: compute spectrogram from input audio --> specs/SPEC.jpeg\
 `python2 SpecCreator.py [--audio-path=AUDIO_PATH] [--dir=DIRECTORY_WITH_AUDIOS]`
 
 Second step: process spectrogram by CNN --> results/RESULTS.json\
